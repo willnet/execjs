@@ -209,8 +209,9 @@ module ExecJS
         end
       else
         def exec_runtime(filename)
-          Rails.logger.debug "filename: #{filename}"
-          Rails.logger.debug "binary: #{binary}"
+          Rails.logger.debug "filename: #{filename.inspect}"
+          Rails.logger.debug "binary: #{binary.inspect}"
+          Rails.logger File.read(filaname)
           io = IO.popen(binary.split(' ') << filename, @popen_options.merge({err: [:child, :out]}))
           output = io.read
           io.close
